@@ -51,7 +51,7 @@ class Simulation:
         elif product == 4:
             p_name = "Bread"
 
-        item: Item = Item()
+        item: Item
 
         if pack < 60:
             item = self.oneFactory.create_product(p_name)

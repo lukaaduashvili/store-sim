@@ -5,6 +5,9 @@ import Discount
 from observerInterfaces import Observer, Subject
 from Receipt import ClerkReceipt, ClientReceipt
 
+X_REPORT_NUM: int = 20
+Z_REPORT_NUM: int = 100
+
 
 class Clerk(Subject):
     _managers: List[Observer] = []
@@ -30,16 +33,15 @@ class Clerk(Subject):
         self.clerk_receipt = ClerkReceipt()
 
     @staticmethod
-    def payment_prompt() -> None:
+    def payment_prompt() -> str:
         payment: str = input("Pay with cash or card?")
         if payment == "card":
-            print("Customer paid with card")
-        else:
-            print("Customer paid with cash")
+            return "Customer paid with card"
+        return "Customer paid with cash"
 
     def process_client(
         self, client: Client.StoreClient, discount: Discount.StoreDiscount
-    ) -> None:
+    ) -> str:
         self._num_receipt += 1
         client_receipt: ClientReceipt = ClientReceipt(discount)
 
@@ -50,9 +52,11 @@ class Clerk(Subject):
         for item in client_receipt.get_client_items():
             self.clerk_receipt.add_item(item)
         print(client_receipt.to_string())
-        self.payment_prompt()
 
-        if self._num_receipt == 5:
-            self.notify(20)
-        elif self._num_receipt == 10:
-            self.notify(100)
+        if self._num_receipt == X_REPORT_NUM:
+            self.notify(self._num_receipt)
+        elif self._num_receipt == Z_REPORT_NUM:
+            self.notify(self._num_receipt)
+
+        print(self.payment_prompt())
+        return self.payment_prompt()
