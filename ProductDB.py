@@ -6,12 +6,16 @@ from Singleton import Singleton
 
 
 class ProductDB(metaclass=Singleton):
-    Apple: dict[str, str] = {"Name": "Apple", "Price": "5"}
-    Beer: dict[str, str] = {"Name": "Beer", "Price": "10"}
-    productDb: List[dict[str, str]] = [Apple, Beer]
+    Apple: dict[str, str] = {"Name": "Apple", "Price": "3.99"}
+    Beer: dict[str, str] = {"Name": "Beer", "Price": "5.50"}
+    Milk: dict[str, str] = {"Name": "Milk", "Price": "3.99"}
+    Cheese: dict[str, str] = {"Name": "Cheese", "Price": "8.99"}
+    Bread: dict[str, str] = {"Name": "Bread", "Price": "2.99"}
 
-    def get_item_price(self, name: str) -> int:
+    productDb: List[dict[str, str]] = [Apple, Beer, Milk, Cheese, Bread]
+
+    def get_item_price(self, name: str) -> float:
         for item in self.productDb:
             if item["Name"] == name:
-                return int(item["Price"])
+                return float(item["Price"])
         return -1

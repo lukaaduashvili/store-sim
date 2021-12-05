@@ -8,7 +8,7 @@ from Singleton import Singleton
 @dataclass
 class Item:
     amount: int = 0
-    price: int = 0
+    price: float = 0
     name: str = ""
 
 

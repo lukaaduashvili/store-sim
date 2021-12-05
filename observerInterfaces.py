@@ -5,7 +5,7 @@ from abc import ABC, abstractmethod
 
 class Observer(ABC):
     @abstractmethod
-    def update(self, subject: Subject) -> None:
+    def update(self, subject: Subject, num: int) -> None:
         pass
 
 
@@ -19,5 +19,13 @@ class Subject(ABC):
         pass
 
     @abstractmethod
-    def notify(self) -> None:
+    def notify(self, num: int) -> None:
+        pass
+
+    @abstractmethod
+    def print_x_report(self) -> None:
+        pass
+
+    @abstractmethod
+    def close_cashier(self) -> None:
         pass
